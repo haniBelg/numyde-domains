@@ -1,0 +1,18 @@
+{
+  ".": ["layout", [".gender", ".firstName", ".lastName", ".birthName"]],
+  ".gender": ["validator", "required", "values", ["M", "F"]],
+  ".firstName": ["regex", "[A-Z][a-z]{0,19}"],
+  ".lastName": ["regex", "[A-Z][a-z]{0,19}"],
+  ".birthName": [
+    "regex",
+    "[A-Z][a-z]{0,19}",
+    "follow",
+    ".lastName",
+    "editable",
+    ".gender == 'F'",
+    "hide",
+    ".gender == 'M'"
+  ],
+  ".husbandName": ["regex", "[A-Z][a-z]{0,19}", "remove", ".gender == 'M'"],
+  ".wifeName": ["regex", "[A-Z][a-z]{0,19}", "remove", ".gender == 'F'"]
+}

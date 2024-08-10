@@ -1,0 +1,42 @@
+package api;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class SettingsBuilder {
+    private final String key;
+    private final InputBuilder inputBuilder;
+    Map<String, Map<String, String>> settingsHost;
+    Map<String, String> settings;
+
+    public SettingsBuilder(String key, InputBuilder inputBuilder, Map<String, Map<String, String>> settingsHost) {
+        this.key = key;
+        this.inputBuilder = inputBuilder;
+        this.settingsHost = settingsHost;
+    }
+
+    public SettingsBuilder setting(String name, String value) {
+        if (this.settingsHost.get(key) == null) {
+            this.settings = new HashMap<>();
+            this.settingsHost.put(key, this.settings);
+        }
+        this.settings.put(name, value);
+        return this;
+    }
+
+    public Input build() {
+        return this.inputBuilder.build();
+    }
+
+    public SettingsBuilder headers(String key) {
+        return this.inputBuilder.headers(key);
+    }
+
+    public SettingsBuilder pathParam(String key) {
+        return this.inputBuilder.pathParam(key);
+    }
+
+    public BodyBuilder body(String key) {
+        return this.inputBuilder.body(key);
+    }
+}

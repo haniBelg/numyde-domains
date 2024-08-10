@@ -1,0 +1,38 @@
+package api;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class InputBuilder {
+    Map<String, Map<String, String>> pathParams;
+    Map<String, Map<String, String>> headers;
+    Map<String, Object> body;
+
+    public SettingsBuilder pathParam(String key) {
+        if (this.pathParams == null) {
+            this.pathParams = new HashMap<>();
+            this.pathParams.put(key, null);
+        }
+        return new SettingsBuilder(key, this, this.pathParams);
+    }
+
+    public SettingsBuilder headers(String key) {
+        if (this.headers == null) {
+            this.headers = new HashMap<>();
+            this.headers.put(key, null);
+        }
+        return new SettingsBuilder(key, this, this.headers);
+    }
+
+    public BodyBuilder body(String key) {
+        if (this.body == null) {
+            this.body = new LinkedHashMap<>();
+        }
+        return new BodyBuilder(this.body, this).key(key);
+    }
+
+    public Input build() {
+        return new Input(pathParams, headers, body);
+    }
+}

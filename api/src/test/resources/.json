@@ -1,0 +1,28 @@
+{
+  "body": {
+    "properties": [
+      {
+        "name": "data",
+        "settings": [{ "key": "validator", "value": "dataValidator" }]
+      },
+      {
+        "name": "id",
+        "settings": [
+          { "key": "regex", "value": "[0-9]{4}" },
+          { "key": "validator", "value": "idValidator" }
+        ]
+      },
+      {
+        "name": "details",
+        "settings": [{ "key": "validator", "value": "detailsValidator" }],
+        "properties": [
+          { "name": "name", "properties": [{ "name": "deepName" }] },
+          {
+            "name": "date",
+            "settings": [{ "key": "validator", "value": "futureDateValidator" }]
+          }
+        ]
+      }
+    ]
+  }
+}
